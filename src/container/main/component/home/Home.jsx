@@ -48,7 +48,6 @@ const Home = () => {
       </div>
       {hideShowHeartMoMo && (
         <ListDonationPrograms
-        isTrue={hideShowHeartMoMo}
         />
       )}
     </div>

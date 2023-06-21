@@ -6,3 +6,5 @@ react-router-dom@6.3.0
 @mui/icons-material @mui/material @emotion/styled @emotion/react
 npm install @material-ui/core @material-ui/icons
 npm install react-redux
+npm install intl
+npm install date-fns

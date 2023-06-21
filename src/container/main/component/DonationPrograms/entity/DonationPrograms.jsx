@@ -17,6 +17,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import nhaHaoTam from '../../../../../asset/img/nha-hao-tam.jpg'
 import ModalRequest from '../Modal/ModalRequest';
+import TableDonation from '../../Donation/component/table/TableDonation';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DonationPrograms({id,name,total,unitName,createdDate}) {
     // const icon = name.splice('');
+    const navigate = useNavigate();
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const [showHideModalRequest,setShowHideModalRequest] = useState(false);
@@ -100,10 +103,7 @@ export default function DonationPrograms({id,name,total,unitName,createdDate}) {
                 </IconButton>
             </CardActions>
         {showHideModalRequest &&(
-            <ModalRequest
-            show={showHideModalRequest}
-            onHide={() => setShowHideModalRequest(false)}
-            />
+            navigate('/donation')
         )}
         </Card>
     );
