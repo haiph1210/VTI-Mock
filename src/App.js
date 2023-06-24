@@ -9,6 +9,8 @@ import { Table } from "@material-ui/core";
 import TableDonation from "./container/main/component/Donation/component/table/TableDonation";
 import DonationCard from "./container/main/component/Donation/component/cart/DonationCart";
 import MainDonation from "./container/main/component/Donation/component/mainDonation/MainDonation";
+import { ToastContainer } from "react-toastify";
+import Donation from "./container/main/component/Donation/entity/Donation";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,24 +21,37 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: '/donationPrograms',
+        path: '/admin-donationPrograms',
         element: <DonationProgramsTable></DonationProgramsTable>
       },
+      {
+        path: '/admin-donation',
+        element: <MainDonation></MainDonation>
+      },  
+    
     ]
   },
-  {
-    path: '/donation',
-    element: <MainDonation></MainDonation>
-  },  
-
+  
 ])
 function App() {
   return (
     <div>
-      <>
+      <div>
         <RouterProvider router={router} />
 
-      </>
+      </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 }

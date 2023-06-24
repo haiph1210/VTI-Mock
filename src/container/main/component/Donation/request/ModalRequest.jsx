@@ -7,8 +7,10 @@ import CustomeSelect from '../../../../../custome/customeSelect/CustomeSelect';
 import CustomeInput from '../../../../../custome/customeSelect/CustomeInput';
 import './ModalRequest.scss';
 import SendIcon from '@mui/icons-material/Send';
-import { useDispatch } from 'react-redux';
-import { createDonateAction } from '../component/redux/DonationAction';
+import { useDispatch, useSelector } from 'react-redux';
+import { createDonateAction, updateDonateAction } from '../component/redux/DonationAction';
+import { selectUser } from '../../user/redux/UserSelector';
+import { findAllUserAction } from '../../user/redux/UserAction';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -21,12 +23,22 @@ const style = {
     boxShadow: 24,
     p: 4,
 };
-function ModalRequest({ show, onHide }) {
+function ModalRequest({ show, onHide,isUpdate,id }) {
     const dispatch = useDispatch();
-    const [totalPrice,setTotalPrice] = React.useState(0);
-    const [userId,setUserId] = React.useState(0);
+    const [totalPrice, setTotalPrice] = React.useState(0);
+    const [userId, setUserId] = React.useState(1);
+
+    React.useEffect(() => {
+        dispatch(findAllUserAction());
+    }, [])
+    const listUser = useSelector(selectUser);
+
     const handleSend = () => {
-        dispatch(createDonateAction(userId,totalPrice));
+        if(isUpdate === true) {
+            dispatch(updateDonateAction(id,userId,totalPrice,onHide));
+        }else{
+            dispatch(createDonateAction(userId, totalPrice,onHide));
+        }
     }
 
     const handleValue = (value) => {
@@ -46,23 +58,28 @@ function ModalRequest({ show, onHide }) {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }} className='config-modal' >
                         <div className='config-request'>
-                            <CustomeSelect
-                                data={"Người Dùng"}
-                            // options={}
-                            // value={}
-                            />
-                            <CustomeInput
-                                data={"Nhập Số Tiền Muốn Quyên Góp:"}
-                                type={'text'}
-                                placeholder={"Số Tiền Muốn Quyên Góp"}
-                                changeInput={(value) => handleValue(value)}
-                            />
-                            <button
-                                className='config-button'
-                                onClick={handleSend}>
-                                <SendIcon />Gửi</button>
-                            <div>
-                            </div>
+                            <label>Nhập User:</label>
+                            <select onChange={(event) => setUserId(event.target.value)}>
+                                {listUser &&
+                                    listUser.map((item, index) => (
+                                        <option key={index} value={item.id}>
+                                            {item.userName}
+                                        </option>
+                                    ))}
+                                    </select>
+
+                                <CustomeInput
+                                    data={"Nhập Số Tiền Muốn Quyên Góp:"}
+                                    type={'text'}
+                                    placeholder={"Số Tiền Muốn Quyên Góp"}
+                                    changeInput={(value) => handleValue(value)}
+                                />
+                                <button
+                                    className='config-button'
+                                    onClick={handleSend}>
+                                    <SendIcon />Gửi</button>
+                                <div>
+                                </div>
                         </div>
                     </Typography>
                 </Box>

@@ -8,11 +8,11 @@ const createDonate = (userId,donatePrice) => {
     return axios.post(`/donations`,{userId,donatePrice});
 }
 
-const updateDonate = ({id,userId,donatePrice}) => {
-    return axios.post(`/donations/${id}`,{donatePrice});
+const updateDonate = (id,userId,donatePrice) => {
+    return axios.put(`/donations/${id}`,{donatePrice});
 }
 
-const deleteDonate = ({id}) => {
+const deleteDonate = (id) => {
     return axios.delete(`/donations/${id}`);
 }
 const countDonation = () => {

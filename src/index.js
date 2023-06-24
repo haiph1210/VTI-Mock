@@ -4,6 +4,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import Stores from './container/main/redux/Store';
+import 'react-toastify/dist/ReactToastify.css';
 ReactDOM.render(
   <Provider store={Stores}> 
   <React.StrictMode>

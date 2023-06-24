@@ -18,8 +18,9 @@ import './DOnationCart.scss'
 import Horizone from './Horizone';
 import { NumberFormat } from 'intl';
 import ModalRequest from '../../request/ModalRequest';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createDonateAction } from '../redux/DonationAction';
+import { selectUser } from '../../../user/redux/UserSelector';
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -35,6 +36,9 @@ const ExpandMore = styled((props) => {
 export default function DonationCard({ totalPrice, count }) {
     const [isRequest,setIsRequest] = React.useState(false);
     const [expanded, setExpanded] = React.useState(false);
+
+    const listUser = useSelector(selectUser);
+    console.log(listUser);
 
     const handleSend = () => {
         setIsRequest(true);

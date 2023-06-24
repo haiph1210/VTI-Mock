@@ -85,14 +85,18 @@ export default function Dashboard() {
             name: 'Home',
             url: '/home',
             icon: ''
-
         },
         {
             id: '2',
             name: 'DonationPrograms',
-            url: '/donationPrograms',
+            url: '/admin-donationPrograms',
             icon: ''
-
+        },
+        {
+            id: '3',
+            name: 'Donation',
+            url: '/admin-donation',
+            icon: ''
         },
     ])
     const classes = useStyles();

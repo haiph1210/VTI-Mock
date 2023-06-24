@@ -11,6 +11,7 @@ import { findAllDonationAction } from '../redux/DonationAction';
 const TableDonation = ({data}) => {
     const dispatch = useDispatch();
     const selectDonates = useSelector(selectDonation);
+    console.log(selectDonates);
     const [donations,setDonations] = useState([]);
     const formatPrice = (price) => {
         const formatter = new NumberFormat('vi-VN', {
@@ -33,7 +34,7 @@ const TableDonation = ({data}) => {
 
     useEffect(() =>{
       setDonations(selectDonates);
-  },[])
+  },[selectDonates])
   return (
     <div className='table-config'>
       <table>
@@ -43,6 +44,12 @@ const TableDonation = ({data}) => {
             <th>Tên Nhà Hảo Tâm</th>
             <th>Số Tiền</th>
             <th>Ngày Quyên Góp</th>
+            {/* {isAuth && tokenRespone.user.role === "ADMIN"
+            ?
+            :
+            null
+          } config nếu đăng nhập và quyền admin thì hiện*/ }
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +57,7 @@ const TableDonation = ({data}) => {
             donations.length >0 &&
             donations.map((item,index) => (
                 <Donation
+                id = {item.id}
                 index={index+1}
                 lastName={item.lastName}
                 phone={'0979015430'}
