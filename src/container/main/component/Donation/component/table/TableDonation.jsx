@@ -5,7 +5,12 @@ import './TableDonation.scss'
 import { NumberFormat } from 'intl';
 import 'intl/locale-data/jsonp/en';
 import { format } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectDonation } from '../redux/DonationSelect';
+import { findAllDonationAction } from '../redux/DonationAction';
 const TableDonation = ({data}) => {
+    const dispatch = useDispatch();
+    const selectDonates = useSelector(selectDonation);
     const [donations,setDonations] = useState([]);
     const formatPrice = (price) => {
         const formatter = new NumberFormat('vi-VN', {
@@ -17,17 +22,18 @@ const TableDonation = ({data}) => {
     const formatCreatedDate = (createdDate) =>{   
      return format(new Date(createdDate), 'dd/MM/yyyy');
     }
-    const findAll = async() => {
-        const res = await findAllDonate();
-        if(res) {
-        setDonations(res);
-        data(donations);
-        }
+
+    const findAll = () => {
+      dispatch(findAllDonationAction());
     }
 
     useEffect(() =>{
         findAll();
     },[])
+
+    useEffect(() =>{
+      setDonations(selectDonates);
+  },[])
   return (
     <div className='table-config'>
       <table>

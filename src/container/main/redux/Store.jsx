@@ -1,10 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { DonationProgramSlice } from "../component/DonationPrograms/redux/DonationProgramReducer";
+import React from 'react';
+import RootReducer from './RootReducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
-const Store = configureStore({
-    reducer : {
-        donationPrograms: DonationProgramSlice,
+const Stores = createStore(RootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-    }
-})
-export default Store;
+export default Stores

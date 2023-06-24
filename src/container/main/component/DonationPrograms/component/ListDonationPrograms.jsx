@@ -2,26 +2,33 @@ import React, { useEffect, useState } from 'react'
 import { findAllPageDP } from '../service/DonationProgramService';
 import DonationPrograms from '../entity/DonationPrograms';
 import './ListDonationPrograms.scss'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DonationProgramSlice } from '../redux/DonationProgramReducer';
+import { findAllDPAction } from '../redux/DonationProgramsAction';
+import { selectDP, selectTotalPage } from '../redux/DonationProgramSelect';
 
 const ListDonationPrograms = () => {
   const dispatch = useDispatch();
+  const selectListDP = useSelector(selectDP);
+  const selectTotalPages = useSelector(selectTotalPage);
     const [listDP,setListDP] = useState([]);
     const [totalPages,setTotalPage] = useState(1);
-    const findAllDP = async(page) => {
-        const res = await findAllPageDP(page);
-        if(res) {
-          console.log(res);
-            // dispatch(DonationProgramSlice.reducer.donationPrograms(res))
-            setListDP(res.content);
-            setTotalPage(res.totalPages);
+    const findAllDP = (page) => {
+        dispatch(findAllDPAction(page));
         }
-    }
 
     useEffect(() => {
         findAllDP();
-    },[])
+    },[]);
+
+    useEffect(() => {
+      setListDP(selectListDP);
+  },[selectListDP]);
+
+    useEffect(() => {
+      setTotalPage(selectTotalPages);
+  },[selectTotalPages])
+
 
   return (
     <div className='list-dp'>

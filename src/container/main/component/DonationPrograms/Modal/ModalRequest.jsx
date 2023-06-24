@@ -4,6 +4,7 @@ import Modal from '@material-ui/core/Modal';
 import "./ModalRequest.scss"
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
+import { createDonateAction } from '../../Donation/component/redux/DonationAction';
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
@@ -39,13 +40,15 @@ export default function ModalRequest({ show, onHide }) {
     const [name, setName] = useState();
     const [total, setTotal] = useState();
     const [units, setUnits] = useState([]);
+    // const dispatch = useDispatch();
+
 
     const hide = () => {
         onHide();
     }
 
     const handleSendRequest = () => {
-
+        // dispatch(createDonateAction())
     }
 
     const body = (

@@ -19,7 +19,7 @@ instance.interceptors.request.use((request) => {
 
 instance.interceptors.response.use(
     (response) => {
-        return response.data ? response.data : { statusCode: response.status };
+        return response.data ? response.data : response.status;
     },
     (error) => {
         let res = {};
@@ -32,8 +32,8 @@ instance.interceptors.response.use(
         } else {
             console.log('Error', error.message);
         }
-        return res;
+        return Promise.reject(res);
     }
+);
 
-)
 export default instance;

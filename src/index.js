@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Store from './container/main/redux/Store';
 import { Provider } from 'react-redux';
+import Stores from './container/main/redux/Store';
 ReactDOM.render(
-  <Provider store={Store}> 
+  <Provider store={Stores}> 
   <React.StrictMode>
     <App />
   </React.StrictMode>

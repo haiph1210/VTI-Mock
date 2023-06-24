@@ -1,29 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
-import React from 'react'
+import React from 'react';
 
-export const DonationProgramSlice = createSlice({
-    name: 'donationPrograms',
-    initState: {
-        id: '',
-        name: '',
-        totalNumberOfDonation: '',
-        createdDate: '',
-        unitName: '',
-        totalPages: '',
-    },
-    reducers: {
-        findAllDP: (state,action) => {
-            state.push(action.payload);    
-        },
-        createDP: (state,action) => {
+const INITSTATE = {
+    donationPrograms: [],
+    totalPage: 1,
+}
 
-        },
-        updateDP: (state,action) => {
 
-        }
+const DonationProgramsReducer = (state = INITSTATE, action) => {
+    switch (action.type) {
+        case 'DP/findAll':
+            return {
+                ...state,
+                donationPrograms: action.payload.content,
+                totalPage : action.payload.totalPages,
+            }
+        default:
+            return state;
     }
+}
 
-})
-
-
-
+export default DonationProgramsReducer;
