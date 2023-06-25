@@ -20,7 +20,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import { NavLink, Outlet } from 'react-router-dom';
 import './Dashboard.scss';
 import { useSelector } from 'react-redux';
-import { selectAuth } from '../../component/user/redux/auth/AuthSelector';
+import { selectAuth, selectisAuth } from '../../component/user/redux/auth/AuthSelector';
 
 const drawerWidth = 240;
 
@@ -116,12 +116,37 @@ const getMenu = (role) => {
   }
 };
 
+const islogin = (isAuth) => {
+    if (isAuth) {
+      return [
+        {
+          id: '1',
+          name: 'Đăng Xuất',
+          url: '/logout',
+          icon: '',
+        },
+      ];
+    } else {
+      return [
+        {
+          id: '1',
+          name: 'Login',
+          url: '/login',
+          icon: '',
+        },
+      ];
+    }
+  };
+
 export default function Dashboard() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const tokenRes = useSelector(selectAuth);
+  const auth = useSelector(selectisAuth);
+  console.log(auth);
   const menu = getMenu(tokenRes.role); // Get the menu based on the role
+  const login = islogin(auth);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -176,6 +201,19 @@ export default function Dashboard() {
         <Divider />
         <List>
           {menu.map((item, index) => (
+            <NavLink key={item.id} to={item.url} className={navLinkClass}>
+              <ListItem button key={index}>
+                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={item.name} />
+              </ListItem>
+            </NavLink>
+          ))}
+        </List>
+        <Divider />
+
+        <Divider />
+        <List>
+          {login.map((item, index) => (
             <NavLink key={item.id} to={item.url} className={navLinkClass}>
               <ListItem button key={index}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

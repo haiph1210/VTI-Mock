@@ -18,6 +18,22 @@ export const loginAction = (username,password,navigateCallBack) => {
         }
     }
 }
+
+export const logoutAction = (navigateCallBack) => {
+    return async(dispatch) => {
+        try {
+                dispatch({
+                    type: 'Auth/logout',
+                });
+                localStorage.removeItem('token')
+                toast.success('Logout Success');
+                navigateCallBack();
+        } catch (error) {
+        }
+    }
+}
+
+
 export const registerAction = (userName,email,password,firstName,lastName) => {
     return async(dispatch) => {
         try {

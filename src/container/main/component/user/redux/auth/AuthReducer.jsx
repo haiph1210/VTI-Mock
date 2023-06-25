@@ -1,5 +1,6 @@
 const initState = {
-    tokenResponse: {}
+    tokenResponse: {},
+    isAuth: false
 }
 
 const AuthReducer = (state = initState, action) => {
@@ -7,9 +8,16 @@ const AuthReducer = (state = initState, action) => {
         case 'Auth/login':
             return {
                 ...state,
-                tokenResponse: action.payload
+                tokenResponse: action.payload,
+                isAuth: true
             }
 
+            case 'Auth/logout':
+                return {
+                    ...state,
+                    tokenResponse : {},
+                    isAuth: false
+                }
         default:
             return state;
     }

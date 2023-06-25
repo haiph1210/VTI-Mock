@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createDonateAction, updateDonateAction } from '../component/redux/DonationAction';
 import { findAllUserAction } from '../../user/redux/user/UserAction';
 import { selectUser } from '../../user/redux/user/UserSelector';
+import { selectAuth } from '../../user/redux/auth/AuthSelector';
 const style = {
     position: 'absolute',
     top: '50%',
@@ -31,13 +32,13 @@ function ModalRequest({ show, onHide,isUpdate,id }) {
     React.useEffect(() => {
         dispatch(findAllUserAction());
     }, [])
-    const listUser = useSelector(selectUser);
+    const user = useSelector(selectAuth);
 
     const handleSend = () => {
         if(isUpdate === true) {
-            dispatch(updateDonateAction(id,userId,totalPrice,onHide));
+            dispatch(updateDonateAction(id,user.id,totalPrice,onHide));
         }else{
-            dispatch(createDonateAction(userId, totalPrice,onHide));
+            dispatch(createDonateAction(user.id, totalPrice,onHide));
         }
     }
 
@@ -58,15 +59,6 @@ function ModalRequest({ show, onHide,isUpdate,id }) {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }} className='config-modal' >
                         <div className='config-request'>
-                            <label>Nhập User:</label>
-                            <select onChange={(event) => setUserId(event.target.value)}>
-                                {listUser &&
-                                    listUser.map((item, index) => (
-                                        <option key={index} value={item.id}>
-                                            {item.userName}
-                                        </option>
-                                    ))}
-                                    </select>
 
                                 <CustomeInput
                                     data={"Nhập Số Tiền Muốn Quyên Góp:"}

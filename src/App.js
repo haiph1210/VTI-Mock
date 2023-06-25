@@ -12,6 +12,7 @@ import MainDonation from "./container/main/component/Donation/component/mainDona
 import { ToastContainer } from "react-toastify";
 import Donation from "./container/main/component/Donation/entity/Donation";
 import ModalLogin from "./container/main/component/user/Modal/ModalLogin";
+import ModalLogOut from "./container/main/component/user/Modal/ModalLogOut";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <ModalLogin></ModalLogin>,
+    
+  },
+  {
+    path: '/logout',
+    element: <ModalLogOut></ModalLogOut>,
     
   },
   {
