@@ -11,6 +11,7 @@ const ListDonationPrograms = () => {
   const dispatch = useDispatch();
   const selectListDP = useSelector(selectDP);
   const selectTotalPages = useSelector(selectTotalPage);
+  console.log(selectListDP);
     const [listDP,setListDP] = useState([]);
     const [totalPages,setTotalPage] = useState(1);
     const findAllDP = (page) => {
@@ -32,7 +33,7 @@ const ListDonationPrograms = () => {
 
   return (
     <div className='list-dp'>
-      {listDP && listDP.length && listDP.map((item,index) => (
+      {selectListDP && selectListDP.length && selectListDP.map((item,index) => (
         <DonationPrograms
         key={index}
         id={item.id}

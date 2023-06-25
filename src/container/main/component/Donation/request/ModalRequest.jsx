@@ -9,8 +9,8 @@ import './ModalRequest.scss';
 import SendIcon from '@mui/icons-material/Send';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDonateAction, updateDonateAction } from '../component/redux/DonationAction';
-import { selectUser } from '../../user/redux/UserSelector';
-import { findAllUserAction } from '../../user/redux/UserAction';
+import { findAllUserAction } from '../../user/redux/user/UserAction';
+import { selectUser } from '../../user/redux/user/UserSelector';
 const style = {
     position: 'absolute',
     top: '50%',

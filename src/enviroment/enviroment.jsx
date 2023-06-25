@@ -3,19 +3,16 @@ import axios from "axios"
 const instance = axios.create({
     baseURL: 'http://localhost:8080/api/v1',
     responseType: 'json',
-  
 })
 
 instance.interceptors.request.use((request) => {
-    // const token = localStorage.getItem("token")
-    //     ? JSON.parse(token)
-    //     : null;
-    // if (token && request.method !== "GET") {
-    //     request.headers['Authorization'] = 'Bearer' + token;
-    //     request.headers['Cros-Orrigin'] = instance.headers;
-    // }
+    const token = localStorage.getItem("token");
+    if (token) {
+        request.headers['Authorization'] = 'Bearer ' + token;
+    }
     return request;
 })
+
 
 instance.interceptors.response.use(
     (response) => {

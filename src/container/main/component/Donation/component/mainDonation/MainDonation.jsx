@@ -7,18 +7,30 @@ import { countDonation, totalPriceDonation } from '../../service/DonationService
 const MainDonation = () => {
     const [count,setCount] = useState(0);
     const [price,setPrice] = useState(0);
-    const totalCount = async() => {
-        const res = await countDonation() ;
-        if(res) {
+    const totalCount = async () => {
+        try {
+          const res = await countDonation();
+          if (res) {
             setCount(res);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          // Hiển thị thông báo lỗi cho người dùng hoặc thực hiện các xử lý khác tùy theo yêu cầu của bạn
         }
-    }
-    const totalPrice = async() => {
-        const res = await totalPriceDonation() ;
-        if(res) {
+      };
+      
+      const totalPrice = async () => {
+        try {
+          const res = await totalPriceDonation();
+          if (res) {
             setPrice(res);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          // Hiển thị thông báo lỗi cho người dùng hoặc thực hiện các xử lý khác tùy theo yêu cầu của bạn
         }
-    }
+      };
+      
     const handleData = (value) => {
         console.log(value);
     }

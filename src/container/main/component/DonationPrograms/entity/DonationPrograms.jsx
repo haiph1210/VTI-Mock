@@ -103,7 +103,7 @@ export default function DonationPrograms({id,name,total,unitName,createdDate}) {
                 </IconButton>
             </CardActions>
         {showHideModalRequest &&(
-            navigate('/donation')
+            navigate('/admin-donation')
         )}
         </Card>
     );

@@ -1,4 +1,4 @@
-import { findAllUser } from "../service/UserService"
+import { findAllUser } from "../../service/UserService"
 
 export const findAllUserAction = () => {
     return async (dispatch) => {

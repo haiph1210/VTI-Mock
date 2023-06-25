@@ -5,6 +5,8 @@ import "./ModalRequest.scss"
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
 import { createDonateAction } from '../../Donation/component/redux/DonationAction';
+import { useDispatch } from 'react-redux';
+import { createDPAction, updateDPAction } from '../redux/DonationProgramsAction';
 function rand() {
     return Math.round(Math.random() * 20) - 10;
 }
@@ -31,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ModalRequest({ show, onHide }) {
+export default function ModalRequest({ show, onHide,isUpdate,id }) {
     
     const classes = useStyles();
     // getModalStyle is not a pure function, we roll the style only on the first render
@@ -40,7 +42,7 @@ export default function ModalRequest({ show, onHide }) {
     const [name, setName] = useState();
     const [total, setTotal] = useState();
     const [units, setUnits] = useState([]);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
     const hide = () => {
@@ -48,7 +50,12 @@ export default function ModalRequest({ show, onHide }) {
     }
 
     const handleSendRequest = () => {
-        // dispatch(createDonateAction())
+        if(isUpdate === true) {
+            dispatch(updateDPAction(id,name,total))
+        }else{
+            dispatch(createDPAction(name,total,units))
+
+        }
     }
 
     const body = (

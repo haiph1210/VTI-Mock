@@ -8,8 +8,10 @@ import { format } from 'date-fns';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectDonation } from '../redux/DonationSelect';
 import { findAllDonationAction } from '../redux/DonationAction';
+import { selectAuth } from '../../../user/redux/auth/AuthSelector';
 const TableDonation = ({data}) => {
     const dispatch = useDispatch();
+    const tokenRes = useSelector(selectAuth);
     const selectDonates = useSelector(selectDonation);
     console.log(selectDonates);
     const [donations,setDonations] = useState([]);
@@ -44,12 +46,14 @@ const TableDonation = ({data}) => {
             <th>Tên Nhà Hảo Tâm</th>
             <th>Số Tiền</th>
             <th>Ngày Quyên Góp</th>
-            {/* {isAuth && tokenRespone.user.role === "ADMIN"
+
+            {tokenRes.role === "Manager"
             ?
+            <th>Action</th>
             :
             null
-          } config nếu đăng nhập và quyền admin thì hiện*/ }
-            <th>Action</th>
+          }
+           
         </tr>
         </thead>
         <tbody>
