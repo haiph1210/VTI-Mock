@@ -12,6 +12,7 @@ import { selectAuth } from '../../../user/redux/auth/AuthSelector';
 const TableDonation = ({data}) => {
     const dispatch = useDispatch();
     const tokenRes = useSelector(selectAuth);
+    console.log(tokenRes);
     const selectDonates = useSelector(selectDonation);
     console.log(selectDonates);
     const [donations,setDonations] = useState([]);

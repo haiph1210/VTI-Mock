@@ -18,6 +18,23 @@ const AuthReducer = (state = initState, action) => {
                     tokenResponse : {},
                     isAuth: false
                 }
+            case 'Auth/refresh':
+                return {
+                    ...state,
+                    tokenResponse : {
+                        token: localStorage.getItem('token'),
+                        id: localStorage.getItem('id'),
+                        userName: localStorage.getItem('userName'),
+                        email: localStorage.getItem('email'),
+                        firstName: localStorage.getItem('firstName'),
+                        lastName: localStorage.getItem('lastName'),
+                        role: localStorage.getItem('role'),
+                        status: localStorage.getItem('status'),
+                    },
+                    isAuth: true,
+                }
+            
+
         default:
             return state;
     }

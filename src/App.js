@@ -13,6 +13,9 @@ import { ToastContainer } from "react-toastify";
 import Donation from "./container/main/component/Donation/entity/Donation";
 import ModalLogin from "./container/main/component/user/Modal/ModalLogin";
 import ModalLogOut from "./container/main/component/user/Modal/ModalLogOut";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { refreshAction } from "./container/main/component/user/redux/auth/AuthAction";
 const router = createBrowserRouter([
   {
     path: '/',
@@ -54,6 +57,12 @@ const router = createBrowserRouter([
   
 ])
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(refreshAction());
+    }
+  },[])
   return (
     <div>
       <div>
